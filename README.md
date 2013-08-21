@@ -1,1 +1,1 @@
-要想安装vundle：https://github.com/gmarik/vundle
+要先安装vundle：https://github.com/gmarik/vundle
