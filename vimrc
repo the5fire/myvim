@@ -39,7 +39,6 @@ Bundle 'Lokaltog/vim-powerline'
 " 配色
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'stephenmckinney/vim-solarized-powerline'
-Bundle 'altercation/vim-colors-solarized'
 
 " vim-scripts repos
 Bundle 'L9'
