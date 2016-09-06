@@ -1,8 +1,9 @@
-"  配置vundle安装
-set nocompatible               " be iMproved
-filetype off
+set nocompatible              " be iMproved, required
+filetype off                  " required
 
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+" call vundle#begin()
 call vundle#rc()
 
 " let Vundle manage Vundle
@@ -13,58 +14,57 @@ Plugin 'VundleVim/Vundle.vim'
 "
 " original repos on github
 " autocompletion
-"Bundle 'davidhalter/jedi-vim'  
-Bundle 'tpope/vim-sensible'
+"Plugin 'davidhalter/jedi-vim'
+Plugin 'tpope/vim-sensible'
 " file tree
-Bundle 'scrooloose/nerdtree'   
+Plugin 'scrooloose/nerdtree'
 " file search
-Bundle 'kien/ctrlp.vim'        
-"Bundle 'sjbach/lusty'
+Plugin 'kien/ctrlp.vim'
+"Plugin 'sjbach/lusty'
 " git plugin
-Bundle 'tpope/vim-fugitive'    
+Plugin 'tpope/vim-fugitive'
 " syntax checking plugin
-Bundle 'scrooloose/syntastic' 
-Bundle 'hynek/vim-python-pep8-indent'
+Plugin 'scrooloose/syntastic'
+Plugin 'hynek/vim-python-pep8-indent'
 " comment code
-Bundle 'scrooloose/nerdcommenter'   
-" Bundle 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/nerdcommenter'
+" Plugin 'Valloric/YouCompleteMe'
 " tag of code
-Bundle 'majutsushi/tagbar'     
+Plugin 'majutsushi/tagbar'
 " search file
-Bundle 'mileszs/ack.vim'       
-Bundle 'rking/ag.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
 
 " 文档编辑
 " restructtext
-"Bundle 'Rykka/riv.vim'
-Bundle 'tommcdo/vim-exchange'
-Bundle 'terryma/vim-multiple-cursors'       
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Flowerowl/ici.vim'
+"Plugin 'Rykka/riv.vim'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Flowerowl/ici.vim'
 
 " 状态栏
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 " 配色
-Bundle 'altercation/vim-colors-solarized'
-" Bundle 'stephenmckinney/vim-solarized-powerline'
+Plugin 'altercation/vim-colors-solarized'
 
 " golang
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'dgryski/vim-godef'
-Bundle 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'jnwhiteh/vim-golang'
+Plugin 'dgryski/vim-godef'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " vim-scripts repos
-Bundle 'L9'
+Plugin 'L9'
 " Java Conf
-"Bundle 'Vim-JDE'
-"Bundle 'JavaBrowser'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
+"Plugin 'Vim-JDE'
+"Plugin 'JavaBrowser'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
 
 
 " non github repos
-" Bundle 'git://git.wincent.com/command-t.git'
+" Plugin 'git://git.wincent.com/command-t.git'
 "
 
 "
@@ -204,9 +204,27 @@ let g:tagbar_type_go = {
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 "
 " Brief help
 " :BundleList          - list configured bundles
 " :BundleInstall(!)    - install(update) bundles
 " :BundleSearch(!) foo - search(or refresh cache first) for foo
 " :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+
+" To ignore plugin indent changes, instead use:
+" filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to
+"  auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line
