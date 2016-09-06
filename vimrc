@@ -2,18 +2,18 @@
 set nocompatible               " be iMproved
 filetype off
 
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#rc()
 
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " My Bundles here:
 "
 " original repos on github
 " autocompletion
-" Bundle 'davidhalter/jedi-vim'  
+"Bundle 'davidhalter/jedi-vim'  
 Bundle 'tpope/vim-sensible'
 " file tree
 Bundle 'scrooloose/nerdtree'   
@@ -23,11 +23,11 @@ Bundle 'kien/ctrlp.vim'
 " git plugin
 Bundle 'tpope/vim-fugitive'    
 " syntax checking plugin
-Bundle 'vim-scripts/Syntastic' 
+Bundle 'scrooloose/syntastic' 
 Bundle 'hynek/vim-python-pep8-indent'
 " comment code
 Bundle 'scrooloose/nerdcommenter'   
-Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Valloric/YouCompleteMe'
 " tag of code
 Bundle 'majutsushi/tagbar'     
 " search file
@@ -38,18 +38,16 @@ Bundle 'rking/ag.vim'
 " restructtext
 "Bundle 'Rykka/riv.vim'
 Bundle 'tommcdo/vim-exchange'
-
 Bundle 'terryma/vim-multiple-cursors'       
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Flowerowl/ici.vim'
 
 " 状态栏
-Bundle 'Lokaltog/vim-powerline'
-" Terminal Vim with 256 colors colorscheme
-Bundle 'fisadev/fisa-vim-colorscheme'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " 配色
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'stephenmckinney/vim-solarized-powerline'
+" Bundle 'stephenmckinney/vim-solarized-powerline'
 
 " golang
 Bundle 'jnwhiteh/vim-golang'
@@ -59,16 +57,15 @@ Bundle 'nsf/gocode', {'rtp': 'vim/'}
 " vim-scripts repos
 Bundle 'L9'
 " Java Conf
-Bundle 'Vim-JDE'
-Bundle 'JavaBrowser'
-
-
+"Bundle 'Vim-JDE'
+"Bundle 'JavaBrowser'
 Bundle "MarcWeber/vim-addon-mw-utils"
 Bundle "tomtom/tlib_vim"
 
 
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
+"
 
 "
 " 一些基本配置
@@ -99,6 +96,8 @@ set expandtab smarttab shiftwidth=4 tabstop=4
 "Always show current position
 set ruler
 
+let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace()  # XXX BREAKPOINT'
+
 "" Height of the command bar
 set cmdheight=2
 "禁止生成临时文件
@@ -118,13 +117,19 @@ vmap <c-c> :w !pbcopy<CR><CR>
 " 状态栏配置
 set laststatus =2 "always has status line
 
-colorscheme torte
+syntax enable
 set background=dark
+colorscheme solarized
 
 
 "
 "插件相关配置
 "
+" let g:jedi#auto_initialization = 1
+" let g:jedi#auto_vim_configuration = 1
+" let g:jedi#popup_on_dot = 1
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#completions_enabled = 1
 
 " NERDTree=====
 " au VimEnter * NERDTree
@@ -168,6 +173,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
