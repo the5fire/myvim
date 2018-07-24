@@ -51,24 +51,30 @@ nnoremap <c-l> <c-w>l
 
 
 """""""""""""""""""基础配置结束"""""""""""""""""""""""""""
-
-
 " let Vundle manage Vundle
 " required! 
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-sensible'
-Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/nerdtree'   
+"Plugin 'kien/ctrlp.vim'
+Plugin 'Yggdroot/LeaderF'  " 快速搜索
+let g:Lf_ShortcutF = '<C-P>'
+autocmd FileType python nnoremap <leader>stc :LeaderfBufTagAllCword<CR>
+autocmd FileType python nnoremap <leader>st :LeaderfBufTagAll<CR>
+
+Plugin 'Yggdroot/indentLine'
+let g:indentLine_color_term = 239
+
+Plugin 'tpope/vim-fugitive' " git wrapper
 Plugin 'w0rp/ale'  " 语法检查
 
 Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdcommenter'   
 Plugin 'Valloric/YouCompleteMe'
 let g:ycm_server_python_interpreter = '/Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python'
-Plugin 'majutsushi/tagbar'
-Plugin 'mileszs/ack.vim'
+Plugin 'majutsushi/tagbar'     
+Plugin 'mileszs/ack.vim'       
 Plugin 'rking/ag.vim'
 
 " 文档编辑
@@ -76,7 +82,7 @@ Plugin 'rking/ag.vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'tommcdo/vim-exchange'
-Plugin 'terryma/vim-multiple-cursors'
+Plugin 'terryma/vim-multiple-cursors'       
 Plugin 'Lokaltog/vim-easymotion' " 快速跳转
 Plugin 'Flowerowl/ici.vim'
 
@@ -146,8 +152,8 @@ let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
-noremap <Leader>y :TagbarToggle<CR>       " Display panel with y (or ,y)
 let g:vim_markdown_folding_disabled = 1
+autocmd FileType python nnoremap <leader>t :TagbarToggle<CR>
 
 " LustyBufferExplorer=====
 "nnoremap <leader>lb :LustyBufExplorer<CR>
@@ -214,3 +220,4 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
