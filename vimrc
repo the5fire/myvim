@@ -1,4 +1,4 @@
-set nocompatible              " be iMproved, required
+"set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -6,71 +6,8 @@ set rtp+=~/.vim/bundle/Vundle.vim
 " call vundle#begin()
 call vundle#rc()
 
-" let Vundle manage Vundle
-" required! 
-Plugin 'VundleVim/Vundle.vim'
-
-" My Bundles here:
-"
-" original repos on github
-" autocompletion
-"Plugin 'davidhalter/jedi-vim'
-Plugin 'tpope/vim-sensible'
-" file tree
-Plugin 'scrooloose/nerdtree'
-" file search
-Plugin 'kien/ctrlp.vim'
-"Plugin 'sjbach/lusty'
-" git plugin
-Plugin 'tpope/vim-fugitive'
-" syntax checking plugin
-Plugin 'scrooloose/syntastic'
-Plugin 'hynek/vim-python-pep8-indent'
-" comment code
-Plugin 'scrooloose/nerdcommenter'
-" Plugin 'Valloric/YouCompleteMe'
-" tag of code
-Plugin 'majutsushi/tagbar'
-" search file
-Plugin 'mileszs/ack.vim'
-Plugin 'rking/ag.vim'
-
-" 文档编辑
-" restructtext
-"Plugin 'Rykka/riv.vim'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'terryma/vim-multiple-cursors'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Flowerowl/ici.vim'
-
-" 状态栏
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-" 配色
-Plugin 'altercation/vim-colors-solarized'
-
-" golang
-Plugin 'jnwhiteh/vim-golang'
-Plugin 'dgryski/vim-godef'
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-
-" vim-scripts repos
-Plugin 'L9'
-" Java Conf
-"Plugin 'Vim-JDE'
-"Plugin 'JavaBrowser'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-
-
-" non github repos
-" Plugin 'git://git.wincent.com/command-t.git'
-"
-
-"
-" 一些基本配置
-"
-set anti enc=utf-8
+"""""""""""""""""" 基础配置
+set history=200
 set guifont=Source_Code_Pro:h12
 
 filetype plugin indent on     " required!
@@ -78,15 +15,10 @@ filetype plugin indent on     " required!
 set autoread
 let mapleader = ','
 let g:mapleader = ','
+noremap \ ,
 let &termencoding=&encoding
 set fileencodings=utf-8,gb18030,gbk,gb2312,big5
 set number
-
-set guifont=Courier_New:h16
-set guifontwide=STXihei:h16
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_checker_args='--ignore=W501,E225'
-let syntastic_python_checker_args='--ignore=E501,E225'
 " Ignore case when searching
 set ignorecase smartcase
 " Highlight search results
@@ -96,85 +28,139 @@ set expandtab smarttab shiftwidth=4 tabstop=4
 "Always show current position
 set ruler
 
-let g:pymode_breakpoint_cmd = 'import pdb; pdb.set_trace()  # XXX BREAKPOINT'
-
 "" Height of the command bar
 set cmdheight=2
-"禁止生成临时文件
+"禁止生成时文件
 set nobackup
 set noswapfile
 
 set wrap
 
-" golang
-set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
-"autocmd BufferWritePost,FileWritePost *.go execute 'go fmt'
-"autocmd BufWritePre *.go '!go fmt'
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
+syntax enable
 
 vmap <c-c> :w !pbcopy<CR><CR>
 
 " 状态栏配置
 set laststatus =2 "always has status line
 
-syntax enable
-set background=dark
-colorscheme solarized
-
-
-"
-"插件相关配置
-"
-" let g:jedi#auto_initialization = 1
-" let g:jedi#auto_vim_configuration = 1
-" let g:jedi#popup_on_dot = 1
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#completions_enabled = 1
-
-" NERDTree=====
-" au VimEnter * NERDTree
-nmap <leader>n :NERDTreeToggle<CR>
-let NERDTreeWinSize=24
-let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
 "switch window
 nnoremap <c-h> <c-w>h
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+
+"""""""""""""""""""基础配置结束"""""""""""""""""""""""""""
+
+
+" let Vundle manage Vundle
+" required! 
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'tpope/vim-sensible'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-fugitive'
+Plugin 'w0rp/ale'  " 语法检查
+
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'Valloric/YouCompleteMe'
+let g:ycm_server_python_interpreter = '/Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python'
+Plugin 'majutsushi/tagbar'
+Plugin 'mileszs/ack.vim'
+Plugin 'rking/ag.vim'
+
+" 文档编辑
+" restructtext
+"Plugin 'Rykka/riv.vim'
+"Plugin 'plasticboy/vim-markdown'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'Lokaltog/vim-easymotion' " 快速跳转
+Plugin 'Flowerowl/ici.vim'
+
+" 状态栏
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+" 配色
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'rakr/vim-one'
+
+" golang
+Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+
+" vim-scripts repos
+Plugin 'L9'
+" Java Conf
+"Plugin 'Vim-JDE'
+"Plugin 'JavaBrowser'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'pangloss/vim-javascript'
+"Plugin 'posva/vim-vue'
+
+
+" non github repos
+" Plugin 'git://git.wincent.com/command-t.git'
+"
+"
+"插件的配置 
+"
+"set anti enc=utf-8
+set guifont=Courier_New:h16
+set guifontwide=STXihei:h16
+let g:syntastic_python_python_exe = 'python3'
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_checker_args='--ignore=W501,E225'
+let syntastic_python_checker_args='--ignore=E501,E225'
+
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8']}
+let g:ale_fixers = ['yapf']
+let g:ale_completion_enabled = 0
+" let g:ale_fix_on_save = 1  " 开启保存时格式化代码
+
+" 快捷键配置
+autocmd FileType python nnoremap <leader>pdb :-1read $HOME/.vim/.snippets/pdb.py<CR>==
+autocmd FileType python nnoremap <leader>ipdb :-1read $HOME/.vim/.snippets/ipdb.py<CR>==
+autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
+
+set background=dark
+colorscheme solarized
+"colorscheme one
+
+" golang
+set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
+"autocmd BufferWritePost,FileWritePost *.go execute 'go fmt'
+"autocmd BufWritePre *.go '!go fmt'
+"autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+
+" NERDTree=====
+nmap <leader>n :NERDTreeToggle<CR>
+let NERDTreeWinSize=24
+let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
+
 " tagbar
 nmap <F4> :TagbarToggle<CR>
 let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
 let g:tagbar_width=26                          " Default is 40, seems too wide
 noremap <Leader>y :TagbarToggle<CR>       " Display panel with y (or ,y)
+let g:vim_markdown_folding_disabled = 1
 
 " LustyBufferExplorer=====
 "nnoremap <leader>lb :LustyBufExplorer<CR>
 set hidden
 
-"let g:syntastic_go_checkers=['go', 'govet', 'golint']
+let g:syntastic_go_checkers=['go', 'govet', 'golint']
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_colorscheme='solarized256_dark'
 set t_Co=256                   " 在终端启用256色
 
-let g:ycm_path_to_python_interpreter = '/usr/bin/python'
-
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-
-" Snippets are separated from the engine. Add this if you want them:
-Plugin 'honza/vim-snippets'
-
-" Trigger configuration. Do not use <tab> if you use
-" https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
-
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn|pyc)$'
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  'node_modules',
+  \ }
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
