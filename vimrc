@@ -25,6 +25,10 @@ set ignorecase smartcase
 set hlsearch incsearch
 " Use spaces instead of tabs
 set expandtab smarttab shiftwidth=4 tabstop=4
+autocmd FileType javascript,html,css,xml set ai
+autocmd FileType javascript,html,css,xml set sw=2
+autocmd FileType javascript,html,css,xml set ts=2
+autocmd FileType javascript,html,css,xml set sts=2
 "Always show current position
 set ruler
 
@@ -49,6 +53,10 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
+" 切换tab
+nnoremap <S-TAB> :tabprevious<CR>
+nnoremap <TAB> :tabnext<CR>
+nmap <leader>tt :tabnew<CR>
 
 """""""""""""""""""基础配置结束"""""""""""""""""""""""""""
 " let Vundle manage Vundle
@@ -57,23 +65,43 @@ Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'tpope/vim-sensible'
 Plugin 'scrooloose/nerdtree'   
-"Plugin 'kien/ctrlp.vim'
+nmap <leader>n :NERDTreeToggle<CR>
+let NERDTreeWinSize=24
+let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
+
 Plugin 'Yggdroot/LeaderF'  " 快速搜索
 let g:Lf_ShortcutF = '<C-P>'
-autocmd FileType python nnoremap <leader>stc :LeaderfBufTagAllCword<CR>
-autocmd FileType python nnoremap <leader>st :LeaderfBufTagAll<CR>
+nnoremap <leader>f :LeaderfBufTagAllCword<CR>
+nnoremap <leader>st :LeaderfBufTagAll<CR>
+nnoremap <leader>m :LeaderfMruCwd<CR>
 
-Plugin 'Yggdroot/indentLine'
+"Plugin 'Yggdroot/indentLine'
 let g:indentLine_color_term = 239
 
 Plugin 'tpope/vim-fugitive' " git wrapper
+
 Plugin 'w0rp/ale'  " 语法检查
+autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
+let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8']}
+let g:ale_fixers = ['yapf']
+let g:ale_completion_enabled = 0
+" let g:ale_fix_on_save = 1  " 开启保存时格式化代码
 
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'scrooloose/nerdcommenter'   
 Plugin 'Valloric/YouCompleteMe'
-let g:ycm_server_python_interpreter = '/Library/Frameworks/Python.framework/Versions/3.6/Resources/Python.app/Contents/MacOS/Python'
+"let g:ycm_server_python_interpreter = '/Users/the5fire/miniconda3/bin/python'
+let g:ycm_server_python_interpreter = '/usr/local/bin/python3.6'
+let g:ycm_log_level = 'debug'
+nnoremap <leader>gd :YcmCompleter GoTo<CR>
+
 Plugin 'majutsushi/tagbar'     
+nmap <F4> :TagbarToggle<CR>
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
+let g:tagbar_width=26                          " Default is 40, seems too wide
+let g:vim_markdown_folding_disabled = 1
+autocmd FileType python nnoremap <leader>y :TagbarToggle<CR>
+
 Plugin 'mileszs/ack.vim'       
 Plugin 'rking/ag.vim'
 
@@ -99,38 +127,23 @@ Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " vim-scripts repos
 Plugin 'L9'
-" Java Conf
-"Plugin 'Vim-JDE'
-"Plugin 'JavaBrowser'
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
 "Plugin 'pangloss/vim-javascript'
 "Plugin 'posva/vim-vue'
+Plugin 'elixir-editors/vim-elixir'
 
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+Plugin 'mattn/emmet-vim'
+Plugin 'sillybun/vim-repl'
 
-" non github repos
-" Plugin 'git://git.wincent.com/command-t.git'
-"
-"
-"插件的配置 
 "
 "set anti enc=utf-8
 set guifont=Courier_New:h16
 set guifontwide=STXihei:h16
-let g:syntastic_python_python_exe = 'python3'
-let g:syntastic_python_checkers=['flake8']
-let g:syntastic_python_checker_args='--ignore=W501,E225'
-let syntastic_python_checker_args='--ignore=E501,E225'
-
-let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8']}
-let g:ale_fixers = ['yapf']
-let g:ale_completion_enabled = 0
-" let g:ale_fix_on_save = 1  " 开启保存时格式化代码
 
 " 快捷键配置
 autocmd FileType python nnoremap <leader>pdb :-1read $HOME/.vim/.snippets/pdb.py<CR>==
 autocmd FileType python nnoremap <leader>ipdb :-1read $HOME/.vim/.snippets/ipdb.py<CR>==
-autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
 
 set background=dark
 colorscheme solarized
@@ -142,31 +155,12 @@ set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
 "autocmd BufWritePre *.go '!go fmt'
 "autocmd FileType go autocmd BufWritePre <buffer> Fmt
 
-
-" NERDTree=====
-nmap <leader>n :NERDTreeToggle<CR>
-let NERDTreeWinSize=24
-let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
-
-" tagbar
-nmap <F4> :TagbarToggle<CR>
-let g:tagbar_ctags_bin='/usr/local/bin/ctags'  " Proper Ctags locations
-let g:tagbar_width=26                          " Default is 40, seems too wide
-let g:vim_markdown_folding_disabled = 1
-autocmd FileType python nnoremap <leader>t :TagbarToggle<CR>
-
-" LustyBufferExplorer=====
-"nnoremap <leader>lb :LustyBufExplorer<CR>
 set hidden
 
 let g:syntastic_go_checkers=['go', 'govet', 'golint']
 let g:Powerline_symbols = 'fancy'
 let g:Powerline_colorscheme='solarized256_dark'
 set t_Co=256                   " 在终端启用256色
-
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  'node_modules',
-  \ }
 
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
@@ -220,4 +214,3 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
-
