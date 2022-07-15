@@ -67,7 +67,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'scrooloose/nerdtree'   
 nmap <leader>n :NERDTreeToggle<CR>
 let NERDTreeWinSize=24
-let NERDTreeIgnore=['\.pyc', '\.swp', '\~']
+let NERDTreeIgnore=['\.pyc', '\.swp', '\~', '__pycache__']
 
 Plugin 'Yggdroot/LeaderF'  " 快速搜索
 let g:Lf_ShortcutF = '<C-P>'
@@ -85,13 +85,16 @@ autocmd FileType python nnoremap <leader>= :0,$!yapf<CR>
 let g:ale_linters = {'javascript': ['eslint'], 'python': ['flake8']}
 let g:ale_fixers = ['yapf']
 let g:ale_completion_enabled = 0
+let g:syntastic_python_flake8_args='--ignore=E501'
 " let g:ale_fix_on_save = 1  " 开启保存时格式化代码
 
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'scrooloose/nerdcommenter'   
-Plugin 'Valloric/YouCompleteMe'
-"let g:ycm_server_python_interpreter = '/Users/the5fire/miniconda3/bin/python'
-let g:ycm_server_python_interpreter = '/usr/local/bin/python3.6'
+Plugin 'ycm-core/YouCompleteMe'
+let g:ycm_server_python_interpreter = 'python3'
+"let g:ycm_server_python_interpreter = '/Library/Frameworks/Python.framework/Versions/3.9/bin/python3.9'
+"" Use homebrew's clangd
+let g:ycm_clangd_binary_path = trim(system('brew --prefix llvm')).'/bin/clangd'
 let g:ycm_log_level = 'debug'
 nnoremap <leader>gd :YcmCompleter GoTo<CR>
 
@@ -110,9 +113,10 @@ Plugin 'rking/ag.vim'
 "Plugin 'Rykka/riv.vim'
 "Plugin 'plasticboy/vim-markdown'
 Plugin 'tommcdo/vim-exchange'
-Plugin 'terryma/vim-multiple-cursors'       
+Plugin 'mg979/vim-visual-multi', {'branch': 'master'}
 Plugin 'Lokaltog/vim-easymotion' " 快速跳转
-Plugin 'Flowerowl/ici.vim'
+"Plugin 'Flowerowl/ici.vim'
+"Plugin 'kamykn/spelunker.vim'  " 英语拼写检查
 
 " 状态栏
 Plugin 'vim-airline/vim-airline'
@@ -135,6 +139,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'mattn/emmet-vim'
 Plugin 'sillybun/vim-repl'
+Plugin 'tomlion/vim-solidity'
 
 "
 "set anti enc=utf-8
